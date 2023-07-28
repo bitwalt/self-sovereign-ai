@@ -72,7 +72,7 @@ class Proxy402:
                     f"Expected status code 200, but received: {response.status_code}, text: {response.text}"
                 )
         # User has not paid
-        if self.auth_mode == "L402":
+        if self.auth_mode == "aperture":
             response = requests.get(url, verify=False)
         elif self.auth_mode == "matador":
             response = requests.post(url, headers=headers, data=json.dumps(data))

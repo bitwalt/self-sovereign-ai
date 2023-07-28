@@ -10,6 +10,7 @@ langchain = "^0.0.240"
 streamlit = "^1.25.0"
 qrcode = "^7.4.2"
 duckduckgo-search = "^3.8.4"
+openai = "^0.27.8"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

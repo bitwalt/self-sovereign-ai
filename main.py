@@ -5,7 +5,7 @@ import streamlit as st
 from langchain.schema import ChatMessage
 
 from chat import ChatGateway
-from config import AI_PROVIDERS, AUTH_METHODS, MODELS, PROXY_402
+from config import AI_PROVIDERS, AUTH_METHODS, MODELS, PROXIES
 from proxy_402 import Proxy402
 from utils import generate_qr, load_prompt_models
 
@@ -42,15 +42,14 @@ def app():
     use_l402 = st.sidebar.checkbox("Use L402", value=True, key="use_l402")
     if use_l402:
         auth_mode = st.sidebar.selectbox(
-            "Select 402 auth mode", AUTH_METHODS, key="auth_mode"
+            "Select L402 proxy", AUTH_METHODS, key="auth_mode"
         )
-        if auth_mode == "L402":
-            deaful_proxy_url = "https://localhost:8081"
-        else:
-            deaful_proxy_url = "http://localhost:8080"
-        proxy_url = st.sidebar.text_input(
-            "Add 402 Proxy url ", value=deaful_proxy_url, key="proxy_url"
-        )
+        proxy_url = st.sidebar.selectbox("Select proxy_url", PROXIES[auth_mode])
+        if proxy_url == "Add":
+            proxy_url = st.sidebar.text_input(
+                "Add 402 Proxy url ", value="", key="proxy_url"
+            )
+        model_name = st.sidebar.selectbox("Select model", MODELS["openai"])
 
         proxy_402 = Proxy402(proxy_url=proxy_url, auth_mode=auth_mode)
 
