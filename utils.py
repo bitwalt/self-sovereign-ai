@@ -1,18 +1,16 @@
 import base64
-import io
-import json
 import os
-from typing import Dict, List
-
+from typing import List, List, Dict
 import qrcode
-import requests
-import yaml
 from PIL import Image
-
+import io
+import requests
+import json
+import streamlit as st
 from schemas import PromptModel
+import yaml
 
 CHAT_MODELS = "./data/models.yml"
-
 
 def load_prompt_models() -> Dict[str, PromptModel]:
     models = {}
@@ -47,13 +45,9 @@ def get_sat_price():
 
 
 def generate_qr(url: str):
-    # Genera il codice QR
     img = qrcode.make(url)
-    # Covert image to bytes
     img_bytes = io.BytesIO()
     img.save(img_bytes, format="PNG")
-    # Reimposta la posizione del cursore all'inizio del file
     img_bytes.seek(0)
-    # Leggi l'immagine da BytesIO
     img = Image.open(img_bytes)
     return img

@@ -37,6 +37,7 @@ def app():
     #### Settings
     st.sidebar.subheader("Settings")
     api_key = os.getenv("OPENAI_API_KEY", "random_key")
+    
     api_base = "https://api.openai.com/v1"
     model_name = "gpt-3.5-turbo"
     use_l402 = st.sidebar.checkbox("Use L402", value=True, key="use_l402")
@@ -60,7 +61,7 @@ def app():
         )
         if ai_provider == "openai":
             # Ask for openai api key
-            api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+            api_key = st.sidebar.text_input("OpenAI API Key", value=api_key, type="password")
             if api_key == "":
                 st.sidebar.warning("Please add your OpenAI API Key")
                 return
@@ -126,9 +127,9 @@ def app():
         if "L402" in response:
             # 402 payment required
             with st.container():
-                l402 = response["L402"]
+                l402 = response["L402"]    
                 st.chat_message("assistant").write(
-                    f"This is your token: **{l402.token}** "
+                      f"This is your token: **{l402.token}** "
                 )
                 payment_req = f"lightning:{l402.invoice}"
                 response_text = f"Scan the QR code with a LN wallet or click on this [Payment Link]({payment_req})"

@@ -20,15 +20,15 @@ class ModelQuery:
 class L402:
     token: str
     invoice: str
-    proxy_mode: str = "L402"
+    proxy_mode: str = "aperture"
     preimage: Optional[str] = None
     paid: bool = False
 
     @staticmethod
-    def from_headers(auth_header, proxy_mode: str = "L402"):
+    def from_headers(auth_header, proxy_mode: str = "aperture"):
         if "Www-Authenticate" in auth_header:
             l402 = auth_header["Www-Authenticate"]
-            if proxy_mode == "L402":
+            if proxy_mode == "aperture":
                 # LightningLabs L402 (LSAT)
                 # Extract macaroon value
                 macaroon = re.search(r'macaroon="(.*?)"', l402).group(1)
@@ -40,7 +40,7 @@ class L402:
                 token = l402.split(" ")[1].split("=")[1].replace(",", "")
                 invoice = l402.split(" ")[2].split("=")[1]
                 return L402(token, invoice, proxy_mode)
-        elif "X-Cashu":
+        elif "X-Cashu" in auth_header:
             token = auth_header["X-Cashu"]
             # TODO: To implement
             raise NotImplementedError("X-Cashu not implemented")
