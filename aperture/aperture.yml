@@ -1,0 +1,52 @@
+# The address which the proxy can be reached at.
+listenaddr: "0.0.0.0:8081"
+staticroot: "./static"
+servestatic: false
+
+debuglevel: "debug"
+
+# Whether the proxy should create a valid certificate through Let's Encrypt for
+# the fully qualifying domain name.
+autocert: false
+
+# Settings for the lnd node used to generate payment requests. All of these
+# options are required.
+authenticator:
+  passphrase: "add your passphrase"
+  network: "mainnet"
+  mailboxaddress: "mailbox.terminal.lightning.today:443"
+  devserver: false
+  
+dbbackend: "sqlite"
+
+sqlite:
+    dbfile: ".aperture/aperture.db"
+
+
+services:
+  - name: "openai"
+    # The regular expression used to match the service host.
+    hostregexp: '^localhost:8081'
+    # The regular expression used to match the path of the URL.
+    pathregexp: '^/.*$'
+    # The host:port which the service can be reached at.
+    address: "127.0.0.1:9001"
+    protocol: http
+    # The LSAT value in satoshis for the service. It is ignored if
+    # dynamicprice.enabled is set to true.
+    price: 100
+
+  - name: "prem"
+    hostregexp: "^localhost:8081/prem"
+    pathregexp: '^/.*$'
+    address: "127.0.0.1:8000"
+    protocol: http
+    price: 50
+
+
+tor:
+  control: "localhost:9051"
+  listenport: 8082
+  virtualport: 8082
+  v3: false
+
