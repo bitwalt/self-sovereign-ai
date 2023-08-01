@@ -1,0 +1,9 @@
+ControlPort 9051
+CookieAuthentication 1
+HashedControlPassword 16:0842DCF8C7AADE0660D4017BA614594A4A13498B6253FEC0E7681224DD
+CookieAuthFileGroupReadable 1
+
+# cashai api server
+HiddenServiceDir /var/lib/tor/hidden_service_cashai/
+HiddenServiceVersion 3
+HiddenServicePort 8000 127.0.0.1:8000
