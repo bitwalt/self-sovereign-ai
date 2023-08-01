@@ -1,23 +1,26 @@
 # Self-Sovereign AI
 
-Welcome to the Self-Sovereign AI poetry project! This repository houses a demonstration of the L402 protocol using langchain and streamlit. The project allows users to connect to their own OpenAI or Prem (assuming you have access to these services). The goal is to demonstrate a self-sovereign AI approach, where users can interact with AI models directly, ensuring data privacy and control.
+Welcome to the Self-Sovereign AI project! This repository houses a demonstration of the L402 protocol using langchain and streamlit.
+
+Unfortunately there are some problems on the Replit dependencies, so at the moment it only works locally. 
+
+The application allows you to chat with ChatGPT through an OpenAI api key or with Prem.AI models if you have an instance running with a GPU.
+
+If you do not have an API key or a Prem instance, you can still chat with OpenAI through a 402 Proxy. 
+Set the desired proxy and for each request you will be prompted to pay an invoice and paste the pre-image of the payment.
+After that you can enjoy calls to OpenAI without the need to set up a credit card! 
+Be Self-Sovereign!
+
 
 ## Table of Contents
 
 - [Self-Sovereign AI](#self-sovereign-ai)
   - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Proxy 402](#proxy-402)
   - [Demo](#demo)
-  - [Contributing](#contributing)
   - [License](#license)
-
-## Introduction
-
-Self-Sovereign AI is a poetry project that showcases the integration of the L402 protocol, langchain, and streamlit. By running this project, users can experience a decentralized AI interaction, where they connect to their preferred AI models, such as OpenAI or Prem, without sharing data with third-party services.
-
-The L402 protocol allows users to make requests to AI models via a proxy URL. Currently, two proxy options are supported: Aperture and Matador. Users are prompted to pay a Lightning invoice for accessing the AI model. Once the payment is made, the user receives a preimage, which they can then use to obtain the AI model's response.
 
 ## Installation
 
@@ -46,17 +49,27 @@ poetry run streamlit run main.py
 
 This command will start the Streamlit application, and you can interact with the UI to connect to your desired AI model.
 
+
+## Proxy 402
+
+- [Matador](https://github.com/Kodylow/matador)
+- [Aperture](https://github.com/lightninglabs/aperture)
+
+To use Aperture you need to connect an LND node and have a passthrough service to OpenAI, here you can find a simple server that does that. https://github.com/waltermaffy/self-sovereign-ai/blob/main/openai_server.py
+
+
 ## Demo
+
+[YouTube Demo - Streamlit L402 ChatBot](https://www.youtube.com/watch?v=MT-L4b5x8Ls)
+
+
 In the Streamlit application, you will be prompted to select your preferred AI model (OpenAI or Prem). After that, you need to choose a proxy service (Aperture or Matador) to handle your AI requests. When you make a request to the AI model, a Lightning invoice will be generated, and you will be asked to make the payment using Lightning Network.
 
-Once the payment is successful, you will receive a preimage. Copy this preimage and paste it into the application to get the AI model's response. The AI model will process your request without any intermediary, ensuring your data sovereignty and privacy.
-
-Please note that to use the AI models (OpenAI or Prem), you must have valid access credentials for the respective services.
-
-## Contributing
-We welcome contributions to the Self-Sovereign AI project. If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request. For major changes, it is recommended to discuss your ideas with the maintainers first.
+Once the payment is successful, you will receive a preimage. Copy this preimage and paste it into the application to get the AI model's response. The proxy will check if the payment has been made and if paid will forward the request to the AI model. The AI model will then generate a response, which will be displayed in the application.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
+If you have any questions or need assistance, please don't hesitate to reach out.
 
-We hope you enjoy exploring the Self-Sovereign AI poetry project! If you have any questions or need assistance, please don't hesitate to reach out. Happy AI interactions!
+
+\#AI4ALL
