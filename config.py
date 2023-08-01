@@ -6,7 +6,7 @@ AI_PROVIDERS = ["openai", "premai"]
 AUTH_METHODS = ["matador", "aperture"]
 PROXIES = {
     'matador': ["http://localhost:8080", 'https://matador.cashai.space', "https://matador.kody.repl.co", "Add"],
-    'aperture': ["https://localhost:8081", 'https://api.cashai.space:8081', "Add"]
+    'aperture': ["https://localhost:8081", 'https://aperture.cashai.space:8081', "Add"]
 }
 MODELS = {
     "openai": ["gpt-3.5-turbo", "gpt-4"],
